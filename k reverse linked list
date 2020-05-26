@@ -1,0 +1,40 @@
+import java.io.*;
+import java.util.*;
+public class Solution {
+    public ListNode reverseList(ListNode A, int B) {
+        ListNode c=A;
+        c=reverseK(A,B);
+        ListNode current=c;
+        for(int i=0;i<B-1;i++)
+        {
+            current=current.next;
+        }
+        while(current.next!=null)
+        {
+            current.next=reverseK(current.next,B);
+            for(int k=0;k<B;k++)
+            {
+                current=current.next;
+            }
+        }
+        return c;
+    }
+    public ListNode reverseK(ListNode index,int k)
+    {
+        ListNode ne=null;
+        ListNode curr=index;
+        ListNode pr=index;
+        for(int i=0;i<k;i++)
+        {
+            pr=pr.next;
+        }
+        for(int i=0;i<k;i++)
+        {
+            ne=curr.next;
+            curr.next=pr;
+            pr=curr;
+            curr=ne;
+        }
+        return pr;
+    }
+}
